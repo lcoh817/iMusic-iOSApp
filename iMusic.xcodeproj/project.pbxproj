@@ -25,6 +25,7 @@
 		642C120C1A94D2AE004239B3 /* NSDictionary+DateAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 642C12081A94D2AE004239B3 /* NSDictionary+DateAdditions.m */; };
 		642C120D1A94D2AE004239B3 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 642C120A1A94D2AE004239B3 /* NSString+Additions.m */; };
 		642C120E1A94D2AE004239B3 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 642C120A1A94D2AE004239B3 /* NSString+Additions.m */; };
+		6435FC061A99F76C009AAAA3 /* HTTPGetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6435FC051A99F76C009AAAA3 /* HTTPGetRequest.m */; };
 		643D8B271A6A36A8001C5B86 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 643D8B261A6A36A8001C5B86 /* MainStoryboard.storyboard */; };
 		643D8B281A6A36A8001C5B86 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 643D8B261A6A36A8001C5B86 /* MainStoryboard.storyboard */; };
 		C4693EED15715B0400FE7BB4 /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = C4693EEA15715B0400FE7BB4 /* Artist.m */; };
@@ -92,6 +93,8 @@
 		642C12081A94D2AE004239B3 /* NSDictionary+DateAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DateAdditions.m"; sourceTree = "<group>"; };
 		642C12091A94D2AE004239B3 /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
 		642C120A1A94D2AE004239B3 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
+		6435FC041A99F76C009AAAA3 /* HTTPGetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPGetRequest.h; sourceTree = "<group>"; };
+		6435FC051A99F76C009AAAA3 /* HTTPGetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPGetRequest.m; sourceTree = "<group>"; };
 		643D8B261A6A36A8001C5B86 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C4693EE915715B0400FE7BB4 /* Artist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
 		C4693EEA15715B0400FE7BB4 /* Artist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 			children = (
 				642C12031A93891A004239B3 /* MusicStoreService.h */,
 				642C12041A93891A004239B3 /* MusicStoreService.m */,
+				6435FC041A99F76C009AAAA3 /* HTTPGetRequest.h */,
+				6435FC051A99F76C009AAAA3 /* HTTPGetRequest.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 				F9A41A831565FDE4009B4863 /* AppDelegate.m in Sources */,
 				F9A41AA31565FEC2009B4863 /* MainViewController.m in Sources */,
 				642C11FD1A90AD27004239B3 /* SearchArtistsViewController.m in Sources */,
+				6435FC061A99F76C009AAAA3 /* HTTPGetRequest.m in Sources */,
 				642C12051A93891A004239B3 /* MusicStoreService.m in Sources */,
 				F925E6DC156836F6008D8E93 /* AboutViewController.m in Sources */,
 				C4693EED15715B0400FE7BB4 /* Artist.m in Sources */,
