@@ -84,8 +84,67 @@
 	
 	SuccessBlock successBlock = ^(NSData *responseData) {
 		
-		NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-	
+		//NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+		
+		NSError *error;
+		
+		// Convert the JSON response data into a dictionary using NSJSONSerialization
+		id jsonDict = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+		
+		// Check is jsonDict was properly parsed
+		if(jsonDict){
+			
+			// Create an new instance of NSMutableArray
+			NSMutableArray *albums = [NSMutableArray array];
+			
+			// Iterate throught the "results" dictionary
+			for(NSDictionary *albumDict in [jsonDict objectForKey:@"results"])
+			{
+				if([[albumDict objectForKey:@"wrapperType"] isEqualToString: @"collection"])
+				{
+					// Create a new album instance
+					Album *album = [[Album alloc] init];
+					
+					// Set the albumID property of the new album object
+					album.albumID =	[[albumDict objectForKey:@"collectionId"]  integerValue];
+				
+					// Set the albumName property of the new album object
+					album.albumName = [albumDict objectForKey:@"collectionName"];
+					
+					// Set the albumURLString property of the new album object
+					album.imageURLString = [albumDict objectForKey:@"artworkUrl100"];
+					
+					// Set the albumPrice price property of the new album object
+					album.price = [albumDict objectForKey:@"collectionPrice"];
+					
+					// Set the collectionViewUrl price property of the new album object
+					album.iTunesURLString = [albumDict objectForKey:@"collectionViewUrl"];
+					
+					// Set the genre property of the new album object
+					album.genre = [albumDict objectForKey:@"primaryGenreName"];
+					
+					// Set the releaseDate property of the new album object. Note dateForKey is a category method added to NSDictionary
+					album.releaseDate = [albumDict dateForKey:@"releaseDate"];
+					
+					album.artist = artist;
+					
+					// Add album to our albums collection
+					[albums addObject:album];
+					
+				}
+				
+				completionBlock(albums, nil);
+				
+			}
+			
+			
+		} else {
+			
+			completionBlock(nil, error);
+			
+		}
+		
+		
 		
 	};
 	

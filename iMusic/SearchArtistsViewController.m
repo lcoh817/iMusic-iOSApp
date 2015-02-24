@@ -103,7 +103,8 @@
 		BrowseAlbumsViewController *controller = [segue destinationViewController];
 		NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 		controller.artist = [self.artists objectAtIndex:indexPath.row];
-		
+	}
+	
 	
 }
 

@@ -31,7 +31,11 @@
 	
 	[self.navigationController setNavigationBarHidden:YES];
 	
+	// Get the updated list of albums from disk
 	self.albums = [NSMutableArray arrayWithArray:[Album findAllAlbums]];
+	
+	// Reload the data in the table to reinvoke the datasource methods
+	[self.tableView reloadData];
 }
 
 - (void)viewDidUnload {

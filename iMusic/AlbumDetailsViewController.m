@@ -50,6 +50,9 @@
 
 -(IBAction)saveToList:(id)sender {
 	
+	// Save the album property to disk
+	[self.album saveAlbum];
+	
 	[self dismissViewControllerAnimated:YES completion:NULL];
 	
 	
