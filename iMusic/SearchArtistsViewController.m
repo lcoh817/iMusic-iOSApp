@@ -92,6 +92,7 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArtistCell"];
 
 	Artist *artist = [self.artists objectAtIndex:indexPath.row];
+	
 	cell.textLabel.text = artist.artistName;
 
 	return cell;
@@ -102,7 +103,8 @@
 		BrowseAlbumsViewController *controller = [segue destinationViewController];
 		NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 		controller.artist = [self.artists objectAtIndex:indexPath.row];
-	}
+		
+	
 }
 
 @end

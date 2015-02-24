@@ -15,7 +15,7 @@
 
 // Define a format string for the API endpoint
 #define ARTIST_ENDPOINT_FORMAT @"http://itunes.apple.com/search?term=%@&media=music&entity=musicArtist&attribute=artistTerm&limit=20"
-
+#define ALBUM_URL_FORMAT @"http://itunes.apple.com/lookup?id=%lu&entity=album"
 
 @implementation MusicStoreService
 
@@ -41,7 +41,8 @@
 			for(id artistDict in [jsonDict objectForKey:@"results"]){
 				
 				// Extract the artistID as an NSInteger value
-				NSInteger artistID = [[artistDict objectForKey:@"artistID"] integerValue];
+				NSInteger artistID = [[artistDict objectForKey:@"artistId"] integerValue];
+				
 				// Extract the artistName as a NSString value
 				NSString *artistName = [artistDict objectForKey:@"artistName"];
 				
@@ -69,15 +70,37 @@
 	// Create a new instance of HTTGetRequest initiliased with our url and success and failure blocks
 	HTTPGetRequest *request = [[HTTPGetRequest alloc] initWithURL:url successBlock:successBlock failureBlock:failureBlock];
 	
-	// Invoke the startRequest method on the request object to kick off the request
+	// Invoke the startRequest method on the request object to issue the request
 	[request startRequest];
 }
 
 
 -(void)loadAlbumsForArtist:(Artist *)artist completionBlock:(ServiceCompletionBlock)completionBlock {
 	
+	// Create URL based on the artist ID
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:ALBUM_URL_FORMAT, (unsigned long)artist.artistID]];
 	
+	NSLog([NSString stringWithFormat:ALBUM_URL_FORMAT, (unsigned long)artist.artistID]);
 	
+	SuccessBlock successBlock = ^(NSData *responseData) {
+		
+		NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+	
+		
+	};
+	
+	FailureBlock failureBlock = ^(NSError *error) {
+		
+		completionBlock(nil, error);
+		
+		
+	};
+	
+	// Create a new instance of HTTGetRequest initiliased with our url and success and failure blocks
+	HTTPGetRequest *request = [[HTTPGetRequest alloc] initWithURL:url successBlock:successBlock failureBlock:failureBlock];
+	
+	// Invoke the startRequest method on the request object to issue the request
+	[request startRequest];
 }
 
 -(void)fetchArtworkForAlbum:(Artist *)album completionBlock:(ServiceCompletionBlock)completionBlock {

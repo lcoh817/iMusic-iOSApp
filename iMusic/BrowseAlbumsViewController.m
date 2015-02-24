@@ -9,6 +9,7 @@
 #import "BrowseAlbumsViewController.h"
 #import "AlbumDetailsViewController.h"
 #import "Album.h"
+#import "MusicStoreService.h"
 
 @interface BrowseAlbumsViewController ()
 @property (nonatomic, strong) NSMutableArray *albums;
@@ -24,20 +25,35 @@
 	self.title = @"Albums";
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
 
-	// Sample Data
-	Album *album = [[Album alloc] init];
-	album.albumID = 446292213;
-	album.albumName = @"In Waves";
-	album.imageURLString = @"http://a4.mzstatic.com/us/r1000/067/Music/93/27/a2/mzi.sottimsz.100x100-75.jpg";
-	album.albumImage = [UIImage imageNamed:@"trivium.jpg"];
-	album.price = @"9.99";
-	album.iTunesURLString = @"http://itunes.apple.com/us/album/in-waves/id446292213?uo=4";
-	album.genre = @"Rock";
-	album.releaseDate = [NSDate date];
-	album.artist = self.artist;
+	// Create a new instance of MusicStoreService
+	MusicStoreService *service = [[MusicStoreService alloc] init];
 	
-	self.albums = [NSMutableArray arrayWithObject:album];
-}
+	// Call loadAlbumsForArtist method on service object to get the album based on artist from iTunes
+	[service loadAlbumsForArtist:self.artist
+			  completionBlock:^(id result, NSError *error) {
+				  
+				  // Display a popup error message if unable to find artist entered on iTunes
+				  if(error)
+				  {
+					  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Search Error"
+																		  message:@"Unable to retrieve search results. "
+															    delegate: nil
+																cancelButtonTitle:@"OK"
+																otherButtonTitles:nil];
+					  
+					  [alertView show];
+					  return;
+				  }
+				  
+				  // Set the albums property to the result paramater of the search
+				  self.albums= result;
+				  // Refresh the result list. This reinvokes the tableView data source methods and redraws the table
+				  [self.tableView reloadData];
+	  
+				  
+			  }];
+	
+	}
 
 - (IBAction)closeDialog:(id)sender {
 	[self dismissViewControllerAnimated:YES completion:NULL];
