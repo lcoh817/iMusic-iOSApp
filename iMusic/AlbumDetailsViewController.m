@@ -7,6 +7,7 @@
 //
 
 #import "AlbumDetailsViewController.h"
+#import "MusicStoreService.h"
 
 @implementation AlbumDetailsViewController
 
@@ -16,9 +17,26 @@
 	//self.navigationController.navigationBarHidden = YES;
 	
 	[self.navigationController setNavigationBarHidden:NO];
-
-	// Set the albumImageView to the albumImage
-	self.albumImageView.image = self.album.albumImage;
+	
+	// Check if albumImage is empty
+	if(!self.album.albumImage)
+	{
+		// Create a new instance of a MusicStoreService object
+		MusicStoreService *service = [[MusicStoreService alloc] init];
+		
+		[service fetchArtworkForAlbum:self.album completionBlock:^(id result, NSError *error) {
+			
+				self.album.albumImage = result;
+				self.albumImageView.image = result;
+			
+		}];
+		
+		
+	} else {
+		// Set the albumImageView to the albumImage
+		self.albumImageView.image = self.album.albumImage;
+		
+	}
 	
 	// Set the albumNameLabel to the albumName
 	self.albumNameLabel.text = self.album.albumName;

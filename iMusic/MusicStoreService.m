@@ -162,12 +162,24 @@
 	[request startRequest];
 }
 
--(void)fetchArtworkForAlbum:(Artist *)album completionBlock:(ServiceCompletionBlock)completionBlock {
+-(void)fetchArtworkForAlbum:(Album *)album completionBlock:(ServiceCompletionBlock)completionBlock {
 	
+	// Create a new instance of a URL object from the imageURLString
+	NSURL *url = [NSURL URLWithString:album.imageURLString];
 	
+	SuccessBlock successBlock = ^(NSData *responseData) {
+		
+		completionBlock([UIImage imageWithData:responseData], nil);
+		
+	};
 	
+	// Create a new instance of a HTTP get request object
+	HTTPGetRequest *request = [[HTTPGetRequest alloc] initWithURL:url successBlock:successBlock failureBlock:NULL];
 	
+	// Kick off the request
+	[request startRequest];
 	
+
 }
 
 
